@@ -1,4 +1,4 @@
-var group = 3, //分爲幾組進行排列
+var group = 4,
     ul = $("#main ul"),
     mainwidth = $("#main").width(),
     sequence = [],
