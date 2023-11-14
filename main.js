@@ -10,10 +10,7 @@ const group = 4,
 var Puzzle = {
     //正常順序的圖片
     initImgOrder: function () { 
-        
         ul.empty();
-        sequence = [];
-        
         let row_size = (mainwidth-100)/group
         var size = group * row_size + "px";
 
