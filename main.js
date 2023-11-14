@@ -1,4 +1,4 @@
-const group = 4,
+var group = 4,
     ul = $("#main ul"),
     subCanvas = $("#compare"),
     mainwidth = $("#main").width(),
