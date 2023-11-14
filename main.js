@@ -1,13 +1,13 @@
 const group = 4,
-    mainCanvas = $("#main li"),
-    subCanvas = $("#compare li"),
+    ul = $("#main ul"),
+    subCanvas = $("#compare"),
     mainwidth = $("#main").width(),
     sequence = [],
     img_list = [],
     img_length = Math.pow(group, 2),
     steps = 0;
 
-const Puzzle = {
+var Puzzle = {
     //正常順序的圖片
     initImgOrder: function () { 
         
@@ -15,17 +15,17 @@ const Puzzle = {
         sequence = [];
         
         let row_size = (mainwidth-100)/group
-        let size = group * row_size + "px";
+        var size = group * row_size + "px";
 
         for (let col = 0; col < img_length; col++) {
-            let y_set = -((col / group) >>> 0)
-            let x_set = -col % group
+            var y_set = -((col / group) >>> 0)
+            var x_set = -col % group
             img_list[col+1] = [x_set, y_set];
             let li = '<li style="background-position: ' + x_set * row_size + 'px ' + y_set * row_size + 'px;"></li>';
             ul.append(li);
             sequence.push(col + 1);
         }
-        mainCanvas.css({
+        $("#main li").css({
             "backgroundSize": size + " " + size,
             "width": row_size,
             "height": row_size,
@@ -36,26 +36,26 @@ const Puzzle = {
             "height": row_size,
         });
     },
-    showRandomImg: function (data) {
+    showRandomImg: function (ary_data) {
         ul.empty();
         let row_size = (mainwidth-100)/group
-        let size = group * row_size + "px";
-        for (let i in data) {
-            let item = data[i]
-            let x = img_list[item][0]
-            let y = img_list[item][1]
-            let li = '<li data-index="' + item + '" style="background-position: ' + x * row_size + 'px ' + y * row_size + 'px;" ></li>';
+        var size = group * row_size + "px";
+        for (let i in ary_data) {
+            var item = ary_data[i]
+            var x = img_list[item][0]
+            var y = img_list[item][1]
+            var li = '<li data-index="' + item + '" style="background-position: ' + x * row_size + 'px ' + y * row_size + 'px;" ></li>';
             ul.append(li);
         }
         ul.append('<li id="block" data-index="' + img_length + '" style="background-image: none;background-color: #fff;"></li>'); //加上空白格
-        mainCanvas.css({
+        $("#main li").css({
             "backgroundSize": size + " " + size,
             "width": row_size,
             "height": row_size,
         });
     },
     imgMove: function (e) {
-        let row = ul.find("li")
+        var row = ul.find("li")
         let mv_before = row.index($(e)) + 1
         let mv_after = row.index($("#block")) + 1
         console.info('移動前位置',mv_before)
@@ -69,13 +69,13 @@ const Puzzle = {
             steps++;
         }
         if (mv_before + group == mv_after && (mv_before + group) < img_length + 1) { //若是空白格在下邊    
-            let p = $("#block").prev();
+            var p = $("#block").prev();
             $(e).next().before($("#block"));
             p.after($(e));
             steps++;
         }
         if (mv_before - group == mv_after && (mv_before - group) > 0) { //若是空白格在上邊
-            let p = $("#block").next();
+            var p = $("#block").next();
             $(e).prev().after($("#block"));
             p.before($(e));
             steps++;
@@ -86,9 +86,9 @@ const Puzzle = {
     //遊戲是否結束
     isGameOver: function () { 
         // 判斷data-index是否有照順序排
-        let row = ul.find("li")
-        let count = 0
-        for (let col = 0; col < img_length; col++) {
+        var row = ul.find("li")
+        var count = 0
+        for (var col = 0; col < img_length; col++) {
             let idx = row.eq(col).data().index;
             if (idx == (col + 1)) {
                 count++;
@@ -106,7 +106,7 @@ const Puzzle = {
         main.sort(function () {
             return 0.5 - Math.random();
         });
-        let num = Puzzle.reverseCount(main);
+        var num = Puzzle.reverseCount(main);
         /** 檢測打亂後是否可解 */
         if (num % 2 != 0) {
             let len = main.length
@@ -118,12 +118,12 @@ const Puzzle = {
     },
     //計算逆序數
     reverseCount: function (daa) { 
-        let reverseAmount = 0;
-        for (let i = 0; i < img_length - 1; i++) {
-            let current = data[i];
+        var reverseAmount = 0;
+        for (var i = 0; i < img_length - 1; i++) {
+            var current = data[i];
             console.info('current ', current)
-            for (let j = i + 1; j < img_length - 1; j++) {
-                let compared = data[j];
+            for (var j = i + 1; j < img_length - 1; j++) {
+                var compared = data[j];
                 if (compared < current) {
                     reverseAmount++;
                     console.info('reverse amount', reverseAmount)
@@ -138,10 +138,10 @@ const Puzzle = {
 Puzzle.initImgOrder();
 //開一個空格
 sequence.splice(img_length - 1, 1); 
-const randArr = Puzzle.randomImgOrder(sequence);
+var randArr = Puzzle.randomImgOrder(sequence);
 Puzzle.showRandomImg(randArr);
 
 
-$("#main ul").on('click', 'li', function () {
+ul.on('click', 'li', function () {
     Puzzle.imgMove(this);
 });
