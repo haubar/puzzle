@@ -10,10 +10,7 @@
     background: #bfbfbf;
     float: left;
 }
-#compare{
-    width: 200px;
-    height: 200px;
-}
+
 #main{
     width: 800px;
     height: 800px;
@@ -43,7 +40,6 @@
     height: 150px;
     border: 20px solid #b06a26;
     border-radius: 50%;
-    background: #fefbf2;
     transform: translate(-50%, -50%);
     box-shadow: inset 0px 0px 10px black;
 }

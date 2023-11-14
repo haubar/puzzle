@@ -29,8 +29,8 @@ var Puzzle = {
         });
         subCanvas.css({
             "backgroundSize": size + " " + size,
-            "width": row_size,
-            "height": row_size,
+            "width": row_size/2,
+            "height": row_size/2,
         });
     },
     showRandomImg: function (ary_data) {
