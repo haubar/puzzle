@@ -9,6 +9,12 @@
     /* background: #EDEDED; */
     background: #bfbfbf;
 }
+#compare{
+    width: 200px;
+    height: 200px;
+    float: left;
+    background: #bfbfbf;
+}
 #main{
     width: 800px;
     height: 800px;
