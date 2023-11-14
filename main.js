@@ -114,7 +114,7 @@ var Puzzle = {
         return main
     },
     //計算逆序數
-    reverseCount: function (daa) { 
+    reverseCount: function (data) { 
         var reverseAmount = 0;
         for (var i = 0; i < img_length - 1; i++) {
             var current = data[i];
