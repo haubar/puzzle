@@ -4,13 +4,13 @@ const group = 4,
     mainwidth = $("#main").width(),
     sequence = [],
     img_list = [],
-    img_length,
+    img_length = Math.pow(group, 2),
     steps = 0;
 
 const Puzzle = {
     //正常順序的圖片
     initImgOrder: function () { 
-        img_length = Math.pow(group, 2);
+        
         ul.empty();
         sequence = [];
         
